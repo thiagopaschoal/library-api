@@ -2,7 +2,6 @@ package br.com.tspaschoal.libraryapi.controllers;
 
 import br.com.tspaschoal.libraryapi.dtos.BookDTO;
 import br.com.tspaschoal.libraryapi.services.BookService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

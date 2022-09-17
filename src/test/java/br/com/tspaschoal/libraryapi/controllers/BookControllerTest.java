@@ -2,7 +2,6 @@ package br.com.tspaschoal.libraryapi.controllers;
 
 import br.com.tspaschoal.libraryapi.dtos.BookDTO;
 import br.com.tspaschoal.libraryapi.services.BookService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import data.BookDataFactory;
 import org.junit.jupiter.api.DisplayName;
