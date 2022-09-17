@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
+import org.modelmapper.ModelMapper;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -22,15 +24,20 @@ public class BookServiceTest {
     @Mock
     private BookRepository repository;
 
+    @Spy
+    private ModelMapper modelMapper;
+
     @InjectMocks
     private BookService bookService;
 
     @Test
     @DisplayName("deve cadastrar um livro com sucesso")
     public void testShouldCreateBook() {
+
         final var book = BookDataFactory.oneEntityBook();
         final var expectedBookDTO = BookDataFactory.oneValidBook();
         when(repository.save(any())).thenReturn(book);
+
         final var response = bookService.save(expectedBookDTO);
         verify(repository, times(1)).save(book);
         assertThat(response, equalTo(expectedBookDTO));

@@ -13,9 +13,12 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public BookDTO save(BookDTO bookDTO) {
-        final var entity = new ModelMapper().map(bookDTO, Book.class);
+        final var entity = modelMapper.map(bookDTO, Book.class);
         final var savedBook = this.bookRepository.save(entity);
-        return new ModelMapper().map(savedBook, BookDTO.class);
+        return modelMapper.map(savedBook, BookDTO.class);
     }
 }
