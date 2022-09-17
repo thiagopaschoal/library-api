@@ -23,4 +23,10 @@ public class LibraryApiControllerAdvice {
                 .collect(toList());
     }
 
+    @ExceptionHandler(DataNotFoundException.class)
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public ErrorDTO handleDataNotFoundException(DataNotFoundException e) {
+        return ErrorDTO.builder().message(e.getMessage()).build();
+    }
+
 }

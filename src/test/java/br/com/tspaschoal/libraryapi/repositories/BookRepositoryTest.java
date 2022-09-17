@@ -11,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Optional;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -31,7 +33,16 @@ public class BookRepositoryTest {
     public void testShouldCreateBook() {
         final var book = BookDataFactory.oneEntityBook();
         final var bookSaved = bookRepository.save(book);
-        assertThat(bookSaved instanceof Book, is(true));
         assertThat(bookSaved, equalTo(book));
+    }
+
+    @Test
+    @DisplayName("deve retornar um livro através do id")
+    public void testShouldReturnOneBookById() {
+        final var book = BookDataFactory.oneEntityBook();
+        book.setId(null);
+        testEntityManager.persist(book);
+        final var bookById = bookRepository.findById(book.getId());
+        assertThat(bookById.get(), equalTo(book));
     }
 }
