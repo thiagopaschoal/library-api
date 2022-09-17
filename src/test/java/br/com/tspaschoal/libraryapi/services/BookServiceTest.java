@@ -1,11 +1,8 @@
 package br.com.tspaschoal.libraryapi.services;
 
-import br.com.tspaschoal.libraryapi.dtos.BookDTO;
-import br.com.tspaschoal.libraryapi.entities.Book;
 import br.com.tspaschoal.libraryapi.exceptions.DataNotFoundException;
 import br.com.tspaschoal.libraryapi.repositories.BookRepository;
 import data.BookDataFactory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

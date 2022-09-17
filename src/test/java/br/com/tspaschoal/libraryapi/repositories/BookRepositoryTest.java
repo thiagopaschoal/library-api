@@ -1,6 +1,5 @@
 package br.com.tspaschoal.libraryapi.repositories;
 
-import br.com.tspaschoal.libraryapi.entities.Book;
 import data.BookDataFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,11 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Optional;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
