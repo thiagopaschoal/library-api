@@ -4,6 +4,7 @@ import br.com.tspaschoal.libraryapi.dtos.BookDTO;
 import br.com.tspaschoal.libraryapi.entities.Book;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class BookDataFactory {
 
@@ -33,5 +34,13 @@ public class BookDataFactory {
                 .publishDate("04/2022")
                 .build();
         return book;
+    }
+
+    public static List<BookDTO> allBooks() {
+        return List.of(oneValidBook(), oneValidBook(), oneValidBook());
+    }
+
+    public static List<Book> allBooksEntity() {
+        return List.of(oneEntityBook(), oneEntityBook(), oneEntityBook());
     }
 }

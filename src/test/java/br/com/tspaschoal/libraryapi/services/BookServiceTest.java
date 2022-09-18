@@ -17,6 +17,7 @@ import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -61,10 +62,47 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("deve lançar erro quanto não existir o livro pesquisado através do id")
-    public void testShouldThrowError_WhenBookNotFound() {
+    public void testShouldThrowError_WhenBookNotFoundById() {
         final var ID = 9999L;
         when(repository.findById(ID)).thenReturn(Optional.empty());
         final var exception = assertThrows(DataNotFoundException.class, () -> bookService.findById(ID));
         assertThat(exception.getMessage(), equalTo("livro não encontrado"));
+        verify(modelMapper, never()).map(any(), any());
     }
+
+    @Test
+    @DisplayName("deve retornar os todos os livros")
+    public void testShouldReturnAllBooks() {
+        final var books = BookDataFactory.allBooksEntity();
+        final var expectedBook = BookDataFactory.allBooks();
+        when(repository.findAll()).thenReturn(books);
+        final var response = bookService.findAll();
+        verify(repository, times(1)).findAll();
+        assertThat(response, hasSize(3));
+        assertThat(response, equalTo(expectedBook));
+    }
+
+    @Test
+    @DisplayName("deve retornar os detalhes de um livro através do isbn")
+    public void testShouldReturnBookDetailByIsbn() {
+        final var ISBN = "978-85-5519-297-5";
+        final var book = BookDataFactory.oneEntityBook();
+        final var expectedBook = BookDataFactory.oneValidBook();
+        when(repository.findByIsbn(ISBN)).thenReturn(Optional.of(book));
+        final var response = bookService.findByIsbn(ISBN);
+        verify(repository, times(1)).findByIsbn(ISBN);
+        assertThat(response, equalTo(expectedBook));
+    }
+
+    @Test
+    @DisplayName("deve lançar erro quanto não existir o livro pesquisado através do isbn")
+    public void testShouldThrowError_WhenBookNotFoundByIsbn() {
+        final var ISBN = "978-85-5519-2-5";
+        when(repository.findByIsbn(ISBN)).thenReturn(Optional.empty());
+        final var exception = assertThrows(DataNotFoundException.class, () -> bookService.findByIsbn(ISBN));
+        assertThat(exception.getMessage(), equalTo("livro não encontrado"));
+        verify(modelMapper, never()).map(any(), any());
+    }
+
+
 }

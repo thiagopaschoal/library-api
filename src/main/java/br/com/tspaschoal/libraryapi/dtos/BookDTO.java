@@ -45,7 +45,7 @@ public class BookDTO {
 
     @JsonProperty("isbn")
     @NotEmpty(message = "isbn não pode ser vazio")
-    @Pattern(regexp = "^[0-9]{3}-[0-9]{2}-[0-9]{4}-[0-9]{3}-[0-9]{1}", message = "isbn deve estar no formato '000-00-0000-000-0'")
+    @Pattern(regexp = "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$", message = "isbn deve conter apenas números e estar no formato '000-00-0000-000-0'")
     private String isbn;
 
     @JsonProperty("dataDePublicação")

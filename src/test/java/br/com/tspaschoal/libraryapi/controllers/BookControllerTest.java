@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -90,13 +90,12 @@ public class BookControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].message", equalTo("isbn deve estar no formato '000-00-0000-000-0'")));
+                .andExpect(jsonPath("$[0].message", equalTo("isbn deve conter apenas números e estar no formato '000-00-0000-000-0'")));
     }
 
     @Test
     @DisplayName("deve retornar os detalhes de um livro através do id")
     public void testShouldReturnBookDetailsById() throws Exception {
-
         final var ID = 1L;
         final var expectedBook = BookDataFactory.oneValidBook();
         when(bookService.findById(anyLong())).thenReturn(expectedBook);
@@ -130,5 +129,39 @@ public class BookControllerTest {
                 .andExpect(jsonPath("message", equalTo("livro não encontrado")));
     }
 
+    @Test
+    @DisplayName("deve retornar todos os livros cadastrados na base de dados")
+    public void testShouldReturnAllBooks() throws Exception {
+        when(bookService.findAll()).thenReturn(BookDataFactory.allBooks());
+        final var request = MockMvcRequestBuilders.get(ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(3)));
+    }
+
+    @Test
+    @DisplayName("deve retornar os detalhes de um livro através do isbn")
+    public void testShouldReturnBookDetailsByIsbn() throws Exception {
+        final var ISBN = "978-85-5519-297-5";
+        final var expectedBook = BookDataFactory.oneValidBook();
+        when(bookService.findByIsbn(anyString())).thenReturn(expectedBook);
+
+        final var request = MockMvcRequestBuilders.get(String.format("%s/isbn/{isbn}", ENDPOINT), ISBN)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("id", equalTo(expectedBook.getId().intValue())))
+                .andExpect(jsonPath("titulo", equalTo(expectedBook.getTitle())))
+                .andExpect(jsonPath("subTitulo", equalTo(expectedBook.getSubTitle())))
+                .andExpect(jsonPath("autor", equalTo(expectedBook.getAuthor())))
+                .andExpect(jsonPath("preço", equalTo(expectedBook.getPrice())))
+                .andExpect(jsonPath("totalDePaginas", equalTo(expectedBook.getPageTotal())))
+                .andExpect(jsonPath("isbn", equalTo(expectedBook.getIsbn())))
+                .andExpect(jsonPath("dataDePublicação", not(emptyOrNullString())));
+    }
 
 }

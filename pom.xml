@@ -48,7 +48,6 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -85,6 +84,26 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.9.0</version>
+				<configuration>
+					<excludedClasses>
+						<param>br.com.tspaschoal.libraryapi.config.*</param>
+						<param>br.com.tspaschoal.libraryapi.dtos.*</param>
+						<param>br.com.tspaschoal.libraryapi.entities.*</param>
+						<param>br.com.tspaschoal.libraryapi.exceptions.*</param>
+					</excludedClasses>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>1.0.0</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

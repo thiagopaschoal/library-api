@@ -2,6 +2,7 @@ package br.com.tspaschoal.libraryapi.controllers;
 
 import br.com.tspaschoal.libraryapi.dtos.BookDTO;
 import br.com.tspaschoal.libraryapi.services.BookService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -11,9 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/books")
+@Api(value = "Book API")
 public class BookController {
 
     @Autowired
@@ -31,7 +34,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Find book by id")
+    @ApiOperation(value = "Get book details by id")
     @ApiResponses({
             @ApiResponse(code = 200, message = "book detail"),
             @ApiResponse(code = 404, message = "book not found")
@@ -39,5 +42,26 @@ public class BookController {
     public ResponseEntity<BookDTO> bookById(@PathVariable Long id) {
         final var book = this.bookService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(book);
+    }
+
+    @GetMapping("/isbn/{isbn}")
+    @ApiOperation(value = "Get book details by isbn")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "book detail"),
+            @ApiResponse(code = 404, message = "book not found")
+    })
+    public ResponseEntity<BookDTO> bookById(@PathVariable String isbn) {
+        final var book = this.bookService.findByIsbn(isbn);
+        return ResponseEntity.status(HttpStatus.OK).body(book);
+    }
+
+    @GetMapping
+    @ApiOperation(value = "Get all books")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Get all books")
+    })
+    public ResponseEntity<List<BookDTO>> books() {
+        final var books = bookService.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(books);
     }
 }
