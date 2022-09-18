@@ -23,10 +23,10 @@
         <sonar.projectKey>thiagopaschoal_library-api</sonar.projectKey>
         <sonar.language>java</sonar.language>
         <sonar.coverage.exclusions>
-            br/com/tspaschoal/libraryapi/config/**,
-            br/com/tspaschoal/libraryapi/entities/**,
-            br/com/tspaschoal/libraryapi/dtos/**,
-            br/com/tspaschoal/libraryapi/exceptions/**,
+            br/com/tspaschoal/libraryapi/config/**.*,
+            br/com/tspaschoal/libraryapi/entities/**.*,
+            br/com/tspaschoal/libraryapi/dtos/**.*,
+            br/com/tspaschoal/libraryapi/exceptions/**.*,
             br/com/tspaschoal/libraryapi/LibraryApiApplication.*
         </sonar.coverage.exclusions>
     </properties>
