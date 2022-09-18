@@ -22,11 +22,11 @@
         <sonar.organization>thiagopaschoal</sonar.organization>
         <sonar.projectKey>thiagopaschoal_library-api</sonar.projectKey>
         <sonar.language>java</sonar.language>
-        <sonar.coverage.exclusions>${project.basedir}/src/main/java/br/com/tspaschoal/libraryapi/config/**.java</sonar.coverage.exclusions>
-        <sonar.coverage.exclusions>${project.basedir}/src/main/java/br/com/tspaschoal/libraryapi/entities/**.java</sonar.coverage.exclusions>
-        <sonar.coverage.exclusions>${project.basedir}/src/main/java/br/com/tspaschoal/libraryapi/dtos/**.java</sonar.coverage.exclusions>
-        <sonar.coverage.exclusions>${project.basedir}/src/main/java/br/com/tspaschoal/libraryapi/exceptions/**.java</sonar.coverage.exclusions>
-        <sonar.coverage.exclusions>${project.basedir}/src/main/java/br/com/tspaschoal/libraryapi/LibraryApiApplication.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/config/**.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/entities/**.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/dtos/**.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/exceptions/**.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/LibraryApiApplication.java</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>
