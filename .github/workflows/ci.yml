@@ -41,11 +41,11 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-      - name: Unit Test
-        run: mvn test
-      - name: Mutation Test
-        run: mvn -DwithHistory test-compile org.pitest:pitest-maven:mutationCoverage
+#      - name: Unit Test
+#        run: mvn test
+#      - name: Mutation Test
+#        run: mvn -DwithHistory test-compile org.pitest:pitest-maven:mutationCoverage
       - name: Sonar
         env:
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
-        run: mvn -DskipTests=true -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Pcoverage
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Pcoverage
