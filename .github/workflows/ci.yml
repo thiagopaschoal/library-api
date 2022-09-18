@@ -52,7 +52,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Mutation Test
-        run: mvn org.pitest:pitest-maven:scmMutationCoverage -Dinclude=ADDED,UNKNOWN -DmutationThreshold=85
+        run: mvn -DwithHistory test-compile org.pitest:pitest-maven:mutationCoverage
 
 
 
