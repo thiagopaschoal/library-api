@@ -22,11 +22,11 @@
         <sonar.organization>thiagopaschoal</sonar.organization>
         <sonar.projectKey>thiagopaschoal_library-api</sonar.projectKey>
         <sonar.language>java</sonar.language>
-        <sonar.exclusions>br/com/tspaschoal/libraryapi/config/**.java</sonar.exclusions>
-        <sonar.exclusions>br/com/tspaschoal/libraryapi/entities/**.java</sonar.exclusions>
-        <sonar.exclusions>br/com/tspaschoal/libraryapi/dtos/**.java</sonar.exclusions>
-        <sonar.exclusions>br/com/tspaschoal/libraryapi/exceptions/**.java</sonar.exclusions>
-        <sonar.exclusions>br/com/tspaschoal/libraryapi/LibraryApiApplication.java</sonar.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/config/**.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/entities/**.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/dtos/**.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/exceptions/**.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>br/com/tspaschoal/libraryapi/LibraryApiApplication.java</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>
@@ -102,6 +102,9 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.9.0</version>
                 <configuration>
+                    <outputFormats>
+                        <outputFormat>XML</outputFormat>
+                    </outputFormats>
                     <excludedClasses>
                         <param>br.com.tspaschoal.libraryapi.config.*</param>
                         <param>br.com.tspaschoal.libraryapi.dtos.*</param>
