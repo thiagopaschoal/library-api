@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>br.com.tspaschoal.api</groupId>
     <artifactId>library-api</artifactId>
@@ -21,6 +21,12 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>thiagopaschoal</sonar.organization>
         <sonar.projectKey>thiagopaschoal_library-api</sonar.projectKey>
+        <sonar.language>java</sonar.language>
+        <sonar.exclusions>br/com/tspaschoal/libraryapi/config/**.java</sonar.exclusions>
+        <sonar.exclusions>br/com/tspaschoal/libraryapi/entities/**.java</sonar.exclusions>
+        <sonar.exclusions>br/com/tspaschoal/libraryapi/dtos/**.java</sonar.exclusions>
+        <sonar.exclusions>br/com/tspaschoal/libraryapi/exceptions/**.java</sonar.exclusions>
+        <sonar.exclusions>br/com/tspaschoal/libraryapi/LibraryApiApplication.java</sonar.exclusions>
     </properties>
     <dependencies>
         <dependency>
