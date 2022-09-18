@@ -29,6 +29,13 @@
             br/com/tspaschoal/libraryapi/exceptions/**.*,
             br/com/tspaschoal/libraryapi/LibraryApiApplication.*
         </sonar.coverage.exclusions>
+        <sonar.exclusions>
+            br/com/tspaschoal/libraryapi/config/**.*,
+            br/com/tspaschoal/libraryapi/entities/**.*,
+            br/com/tspaschoal/libraryapi/dtos/**.*,
+            br/com/tspaschoal/libraryapi/exceptions/**.*,
+            br/com/tspaschoal/libraryapi/LibraryApiApplication.*
+        </sonar.exclusions>
     </properties>
     <dependencies>
         <dependency>
